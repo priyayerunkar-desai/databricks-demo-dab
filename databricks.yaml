@@ -12,7 +12,7 @@ sync:
 targets:
   dev:
     workspace:
-      root_path: /Workspace/Shared/bundles/\${bundle.name}/\${bundle.target}
+      root_path: /Workspace/Shared/bundles/${bundle.name}/${bundle.target}
 
 # ----------------------------------------------------------------------------
 # NOTEBOOK-ONLY DEPLOYMENT (ACTIVE)
