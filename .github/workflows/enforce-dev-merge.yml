@@ -1,0 +1,23 @@
+name: Enforce Dev Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify PR Source
+        run: |
+          echo "PR Head Ref (Source): ${{ github.head_ref }}"
+          
+          # Allow PRs coming ONLY from the 'dev' branch or hotfix branches
+          if [[ "${{ github.head_ref }}" != "dev" && ! "${{ github.head_ref }}" =~ ^hotfix/ ]]; then
+            echo "❌ ERROR: You cannot merge directly into 'main' from a feature branch."
+            echo "Please open a PR to 'dev' first, test it, and then open a PR from 'dev' to 'main'."
+            exit 1
+          fi
+          
+          echo "✅ Success: PR source is valid."
