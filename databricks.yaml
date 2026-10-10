@@ -37,22 +37,22 @@ targets:
 # ----------------------------------------------------------------------------
 # JOB ORCHESTRATION EXAMPLE (UNCOMMENT TO USE)
 # ----------------------------------------------------------------------------
-# resources:
-#   jobs:
-#     sample_orchestration_job:
-#       name: sample-orchestration-job
-#       tasks:
-#         - task_key: run_first
-#           notebook_task:
-#             notebook_path: ${workspace.file_path}/src/first_notebook.py
-#             environment_key: default
-#         - task_key: run_second
-#           depends_on:
-#             - task_key: run_first
-#           notebook_task:
-#             notebook_path: ${workspace.file_path}/src/second_notebook.py
-#             environment_key: default
-#   environments:
-#     - environment_key: default
-#       spec:
-#         client: "1"
+resources:
+  jobs:
+    sample_orchestration_job:
+      name: sample-orchestration-job
+      tasks:
+        - task_key: run_first
+          notebook_task:
+            notebook_path: ${workspace.root_path}/src/first_notebook.py
+            environment_key: default
+        - task_key: run_second
+          depends_on:
+            - task_key: run_first
+          notebook_task:
+            notebook_path: ${workspace.root_path}/src/second_notebook.py
+            environment_key: default
+  environments:
+    - environment_key: default
+      spec:
+        client: "1"
